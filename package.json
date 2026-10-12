@@ -1,0 +1,45 @@
+{
+  "name": "@leokwsw/cordova-plugin-google-login",
+  "version": "1.0.0",
+  "description": "Cordova plugin for Sign in with Google. iOS native code is Swift. Android native code is Kotlin.",
+  "author": {
+    "name": "Leo Wu",
+    "email": "leokwsw@gmail.com",
+    "url": "https://github.com/leokwsw"
+  },
+  "types": "types/index.d.ts",
+  "cordova": {
+    "id": "cordova-plugin-google-login",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "cordova-ios",
+    "cordova-android",
+    "ecosystem:cordova",
+    "google",
+    "sign in with google",
+    "signin"
+  ],
+  "license": "MIT",
+  "engines": {
+    "cordovaDependencies": {
+      "1.0.0": {
+        "cordova": ">=11.0.0",
+        "cordova-ios": ">=7.0.0",
+        "cordova-android": ">=13.0.0"
+      }
+    }
+  },
+  "linkedPackage": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leokwsw/cordova-plugin-google-login.git"
+  }
+}

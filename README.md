@@ -7,9 +7,9 @@ Cordova 的 Google 登入外掛。iOS 原生程式是 Swift，使用 [Google Sig
 ## 需求
 
 - Cordova 11 或更新版本
-- cordova-android 10 或更新版本（Kotlin 會由外掛開啟）
-- cordova-ios 7 或更新版本；cordova-ios 8 以上會改用 Swift Package Manager，這是建議路徑
-- iOS deployment target 13 或更新版本
+- cordova-android 13 或更新版本（編譯 SDK 35；Kotlin 會由外掛開啟）
+- cordova-ios 7 或更新版本；cordova-ios 8 以上改用 Swift Package Manager，較舊版本用 CocoaPods
+- iOS deployment target 15 或更新版本（Google Sign-In 10 的最低版本）
 
 ## 安裝
 
@@ -73,8 +73,8 @@ GoogleLogin.signIn({}, function (user) {
 | --- | --- |
 | `signIn(options)` | 顯示 Google 帳號選擇畫面 |
 | `silentSignIn(options)` | 還原先前授權過的帳號，不主動要求選擇 |
-| `signOut()` | 清除這個 App 的 Google 登入狀態 |
-| `disconnect()` | iOS 會撤銷授權；Android 會清除 Credential Manager 工作階段 |
+| `signOut()` | 清除這個 App 的 Google 登入狀態。成功時得到 `true` |
+| `disconnect()` | iOS 會撤銷授權；Android 會清除 Credential Manager 工作階段。成功時得到 `true` |
 | `getCurrentUser()` | 讀取這個行程裡已經取得的使用者，不顯示 UI |
 
 成功時的物件：
@@ -106,6 +106,7 @@ GoogleLogin.signIn({}, function (user) {
 | `NO_ACTIVITY` | 原生畫面還沒準備好 |
 | `SCOPES_UNSUPPORTED` | Android 不接受額外 OAuth scope |
 | `NONCE_UNSUPPORTED` | iOS 不接受 `nonce` |
+| `REQUEST_IN_PROGRESS` | 已經有一個登入流程在進行 |
 | `SIGN_IN_FAILED` | 其他登入失敗 |
 
 ## 平台差異

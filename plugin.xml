@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-google-login"
+        version="1.0.0">
+    <name>cordova-plugin-google-login</name>
+    <author email="leokwsw@gmail.com" href="https://github.com/leokwsw">Leo Wu</author>
+    <description>Sign in with Google for Cordova. iOS is Swift. Android is Kotlin.</description>
+    <license>MIT</license>
+    <keywords>cordova,google,signin,sign in with google</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=11.0.0" />
+        <engine name="cordova-ios" version=">=7.0.0" />
+        <engine name="cordova-android" version=">=13.0.0" />
+    </engines>
+
+    <preference name="GOOGLE_IOS_CLIENT_ID" />
+    <preference name="GOOGLE_REVERSED_CLIENT_ID" />
+    <preference name="GOOGLE_WEB_CLIENT_ID" />
+
+    <js-module name="GoogleLogin" src="www/google-login.js">
+        <clobbers target="GoogleLogin" />
+    </js-module>
+
+    <platform name="ios" package="swift">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GoogleLogin">
+                <param name="ios-package" value="GoogleLogin" />
+            </feature>
+            <preference name="GoogleIOSClientId" value="$GOOGLE_IOS_CLIENT_ID" />
+            <preference name="GoogleWebClientId" value="$GOOGLE_WEB_CLIENT_ID" />
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="GIDClientID">
+            <string>$GOOGLE_IOS_CLIENT_ID</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="GIDServerClientID">
+            <string>$GOOGLE_WEB_CLIENT_ID</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string>GOOGLE_REVERSED_CLIENT_ID</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$GOOGLE_REVERSED_CLIENT_ID</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+
+        <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="GoogleSignIn" spec="~> 10.0" nospm="true" />
+            </pods>
+        </podspec>
+
+        <source-file src="src/ios/GoogleLogin.swift" />
+    </platform>
+
+    <platform name="android">
+        <preference name="GradlePluginKotlinEnabled" value="true" />
+        <preference name="GradlePluginKotlinCodeStyle" value="official" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GoogleLogin">
+                <param name="android-package" value="com.leokwsw.googlelogin.GoogleLogin" />
+            </feature>
+            <preference name="GoogleWebClientId" value="$GOOGLE_WEB_CLIENT_ID" />
+        </config-file>
+
+        <framework src="src/android/google-login.gradle" custom="true" type="gradleReference" />
+        <source-file src="src/android/GoogleLogin.kt" target-dir="src/com/leokwsw/googlelogin" />
+    </platform>
+</plugin>
